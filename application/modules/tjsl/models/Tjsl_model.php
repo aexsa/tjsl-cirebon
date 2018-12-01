@@ -83,6 +83,8 @@ class Tjsl_model extends BF_Model {
 		$this->db->select('*');
 		$this->db->from('perusahaan');
 		$this->db->where('tipe_perusahaan_id', $id);
+		$this->db->where('status_validasi', 1);
+		
 		//Get contents
 		foreach ($this->db->get()->result_array() as $data ){
 			$perusahaan.= "<option value='$data[perusahaan_id]'>$data[nama_perusahaan]</option>";
