@@ -156,6 +156,24 @@ class perusahaan_model extends MY_Model
 	        return $data;
         }
 
+// buat ngambil keterangan validasi atau belum
+          public function get_notif_perusahaan()
+        {
+            $users_id = $this->auth->user_id();
+            // var_dump($users_id); die();
+
+        	$data =$this->db->select('a.nama_perusahaan, a.status_validasi, b.id')
+                        ->from('perusahaan a')
+                        ->join('users b', 'a.perusahaan_id = b.perusahaan_id')
+                        ->where('a.deleted',0)
+                        ->where('b.id',$users_id)
+                        ->get()->result();
+
+	        return $data;
+
+
+        }
+
 
 
     }
