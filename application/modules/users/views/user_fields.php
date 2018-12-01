@@ -59,8 +59,8 @@ $defaultTimezone = isset($user->timezone) ? $user->timezone : strtoupper(setting
         <!-- SIUP perusahaan -->
         <div class="col-md-6">
             <div class="form-group row" style="margin-left: 1px;">
-                <input class="form-control <?php echo $controlClass; ?>" placeholder="No SIUP Perusahaan" type="text" id="siup" name="siup" value="" />
-                <span class="help-inline"><?php echo form_error('siup_perusahaan'); ?></span>
+                <div class="col-md-12"><div class="name">SIUP :</div>
+                <input class="form-dokumen" data-id="1" name="files" type="file" required></div>
             </div>
         </div>
     </div>

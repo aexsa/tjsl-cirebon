@@ -36,7 +36,7 @@ $fieldData = array(
         ?>
     </div> -->
 
-    <?php echo form_open(site_url(REGISTER_URL), array('class' => "form-horizontal", 'autocomplete' => 'off')); ?>
+    <?php echo form_open(site_url(REGISTER_URL), array('class' => "form-horizontal", 'autocomplete' => 'off','enctype'=>'multipart/form-data')); ?>
     <fieldset>
         <?php Template::block('user_fields', 'user_fields', $fieldData); ?>
     </fieldset>

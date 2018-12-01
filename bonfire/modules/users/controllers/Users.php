@@ -627,7 +627,6 @@ class Users extends Front_Controller
 
               // lakukan upload file dengan memanggil function upload yang ada di GambarModel.php
         $upload = $this->perusahaan_model->upload_file();
-        // print_r($upload);exit();
         // save perusahaan dulu
          if($upload['result'] == "success"){ 
             $data_perusahaan = array(
