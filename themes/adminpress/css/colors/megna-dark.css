@@ -119,7 +119,13 @@ a.link:hover, a.link:focus {
 /*sidebar navigation
 *******************/
 .card-no-border .left-sidebar, .card-no-border .sidebar-nav {
-  background: #272c33; }
+  /*background: #272c33;*/
+  background-image: url('../../assets/images/sidebar-1.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 105%;
+z-index: 10;
+   }
 
 .mini-sidebar .sidebar-nav {
   background: transparent; }
@@ -142,12 +148,12 @@ a.link:hover, a.link:focus {
 
 .sidebar-nav > ul > li.active > a {
   color: #00897b;
-  border-color: #00897b; }
+  border-color: #000; }
   .sidebar-nav > ul > li.active > a i {
     color: #00897b; }
 
 .sidebar-nav ul li a.active, .sidebar-nav ul li a:hover {
-  color: #00897b; }
+  color: #000; }
   .sidebar-nav ul li a.active i, .sidebar-nav ul li a:hover i {
     color: #00897b; }
 

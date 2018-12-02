@@ -5565,8 +5565,9 @@ sidebar navigation
       margin-top: 6px; }
     .sidebar-nav > ul > li > a.active {
       font-weight: 400;
-      background: #242933;
-      color: #26c6da; }
+      background: #f1f1f1;
+color: #26c6da;
+opacity: 0.6; }
   .sidebar-nav > ul > li {
     margin-bottom: 5px; }
     .sidebar-nav > ul > li.active > a {

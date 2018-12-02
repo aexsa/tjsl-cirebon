@@ -23,17 +23,9 @@
     <!-- ============================================================== -->
     <!--sparkline JavaScript -->
     <script src="<?php echo base_url('themes/adminpress/') ?>assets/plugins/sparkline/jquery.sparkline.min.js"></script>
-    <!--morris JavaScript -->
-    <script src="<?php echo base_url('themes/adminpress/') ?>assets/plugins/raphael/raphael-min.js"></script>
-    <script src="<?php echo base_url('themes/adminpress/') ?>assets/plugins/morrisjs/morris.min.js"></script>
-    <!-- Chart JS -->
-    <script src="<?php echo base_url('themes/adminpress/') ?>js/dashboard1.js"></script>
+    
     <!-- ============================================================== -->
-    <!-- google maps api -->
-    <!-- <script src="https://maps.google.com/maps/api/js?key=AIzaSyCUBL-6KdclGJ2a_UpmB2LXvq7VOcPT7K4&sensor=true"></script> -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgP7Og3t7CZhdJdxMQjv3d5HKHuqWj0fc&callback=myMap"></script>
-    <script src="<?php echo base_url('themes/landingpage/') ?>assets/plugins/gmaps/gmaps.min.js"></script>
-    <script src="<?php echo base_url('themes/landingpage/') ?>assets/plugins/gmaps/jquery.gmaps.js"></script>
+    <!-- google 
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="<?php echo base_url('themes/adminpress/') ?>assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>

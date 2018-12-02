@@ -1,6 +1,6 @@
 
     <li class="nav-small-cap">GENERAL</li>
-    <li> <a class=" waves-effect waves-dark" href="<?php echo site_url('skpd/skpd') ?>" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
+    <li> <a class=" waves-effect waves-dark" href="<?php echo site_url('skpd/dashboard') ?>" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
 
     </li>
     <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Master Data</span></a>

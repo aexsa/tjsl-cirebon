@@ -68,7 +68,7 @@ echo theme_view('header');
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
+                    <ul id="sidebarnav" style="background: #FFF;height: 100%;opacity: 0.93;">
                     <!-- sidebar -->
                      <?php
                          $url = $this->uri->segment(1);
