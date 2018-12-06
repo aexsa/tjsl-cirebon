@@ -67,7 +67,7 @@ echo theme_view('header');
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
+                <nav class="sidebar-nav" >
                     <ul id="sidebarnav" style="background: #FFF;height: 105%;opacity: 0.93;">
                     <!-- sidebar -->
                      <?php
@@ -77,7 +77,6 @@ echo theme_view('header');
                          <?php } else { ?>
                          <?php echo theme_view('sidebar/home')?>
                     <?php } ?>
-
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -101,7 +100,7 @@ echo theme_view('header');
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid">
+            <div class="container-fluid" >
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <?php echo isset($content) ? $content : Template::content(); ?>

@@ -41,4 +41,4 @@
         </ul>
     </li>
     <li class="nav-devider"></li>
-<li><a href="<?php echo site_url('logout') ?>"><i class="mdi mdi-book-multiple"></i>Logout</a></li>
+<li><a href="<?php echo site_url('logout'); ?>"><i class="mdi mdi-book-multiple"></i>Logout</a></li>

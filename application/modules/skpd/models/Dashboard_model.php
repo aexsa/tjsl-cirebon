@@ -18,117 +18,68 @@ class Dashboard_model extends MY_Model
        return $chart;
     }
 
-    public function count($cabang)
+  
+
+    public function count_permohonan_tjsl()
     {
-      if ($cabang != 'all') {
-       $this->db->where('cabang_id', $cabang);
-      }
-      $data = $this->db->select('count(id) as jumlah')->from('users')->where('role_id', 13)->get()->row();
+      $data = $this->db->select('count(permohonan_tjsl_id) as jumlah')->from('permohonan_tjsl')->where('deleted', 0)->get()->row();
 
       return $data->jumlah;
     }
 
-    public function count_konsumen($own = false)
+     public function count_permohonan_tjsl_acc()
     {
-      if ($own == true) {
-       // $this->db->where('cabang_id', $cabang);
-      }
-      $data = $this->db->select('count(id) as jumlah')->from('konsumen')->where('deleted', 0)->get()->row();
+      $data = $this->db->select('count(permohonan_tjsl_id) as jumlah_acc')->from('permohonan_tjsl')->where('deleted', 0)->where('status', 1)->get()->row();
 
-      return $data->jumlah;
+      return $data->jumlah_acc;
     }
 
-    public function get_item_terjual($m, $y, $cabang, $own = false)
+    public function count_permohonan_tjsl_realisasi()
     {
-        if ($cabang != 'all') {
-         $this->db->where('c.cabang_id', $cabang);
-        }
+      $data = $this->db->select('count(permohonan_tjsl_id) as jumlah_realisasi')->from('permohonan_tjsl')->where('deleted', 0)->where('status_realisasi', 1)->get()->row();
 
-        if ($own == true) {
-          $this->db->where('a.created_by', $this->auth->user_id());
-        }
-        $data = $this->db->select('b.nama label, sum(a.qty) as value')
-        ->from('penjualan_detail a')
-        ->join('items b','a.items_id = b.id')
-        ->join('users c', 'a.created_by = c.id')
-        ->where('month(a.created_on)', $m)
-        ->where('year(a.created_on)', $y)
-        ->group_by('a.items_id')
-        ->get()->result();
-
-        $chart = $this->create_morrid_data($data);
-        return $chart;
+      return $data->jumlah_realisasi;
     }
+
+    public function total_realisasi()
+    {
+      $data = $this->db->select('sum(nominal) as total')->from('realisasi_tjsl')->where('deleted', 0)->get()->row();
+
+      return $data->total;
+    }
+
  
-    public function get_penjualan_cabang($m, $y, $cabang)
+    public function get_realisasi_tipe_perusahaan($m, $y, $tipe)
     {
-        $data = $this->db->select('c.kota as cabang, sum(a.qty*a.harga) as penjualan')->from('penjualan_detail a')->join('users b','a.created_by = b.id')->join('cabang c', 'b.cabang_id = c.id', 'right')->group_by('c.id')->get()->result();
+        $data = $this->db->select('c.nama_tipe_perusahaan as tipe_perusahaan, sum(b.nominal) as realisasi')
+        ->from('permohonan_tjsl a')->join('realisasi_tjsl b','a.permohonan_tjsl_id = b.permohonan_tjsl_id')
+        ->join('tipe_perusahaan c', 'a.tipe_perusahaan_id = c.tipe_perusahaan_id', 'right')->group_by('c.tipe_perusahaan_id')->get()->result();
         
         $chart = $this->create_morrid_data($data);
         return $chart;
     }
 
-    public function get_penjualan($m, $y, $cabang, $own = false)
+    public function get_realisasi($m, $y, $tipe = false)
     {
-      if ($cabang != 'all') {
-       $this->db->where('b.cabang_id', $cabang);
-      }
-
-      if ($own == true) {
-          $this->db->where('a.created_by', $this->auth->user_id());
-        }
-      $data = $this->db->select('date(a.created_on) as tanggal, sum(a.total) as value')->from('penjualan a')->join('users b','a.created_by = b.id')->group_by('date(a.created_on)')->get()->result();
+      $data = $this->db->select('date(a.created_on) as tanggal, sum(a.nominal) as value')
+      ->from('realisasi_tjsl a')->join('users b','a.created_by = b.id')->group_by('date(a.created_on)')
+      ->get()->result();
 
       $chart = $this->create_morrid_data($data);
       return $chart;
     }
 
-    public function get_top_konsumen($m, $y, $cabang)
-    {
-        if ($cabang != 'all') {
-         $this->db->where('c.cabang_id', $cabang);
-        }
-        $data = $this->db->select('b.nama, sum(total) as pembelian')
-        ->from('penjualan a')
-        ->join('konsumen b','a.konsumen_id = b.id')
-        ->join('users c', 'a.created_by = c.id')
-        ->where('month(a.created_on)', $m)
-        ->where('year(a.created_on)', $y)
-        ->group_by('a.konsumen_id')->order_by('sum(total)','desc')
-        ->limit(5)
-        ->get()->result();
-        return $data;
-    }
+    
 
-    public function get_top($m, $y, $cabang)
-    {
-        if ($cabang != 'all') {
-         $this->db->where('b.cabang_id', $cabang);
-        }
-        $data = $this->db->select('b.display_name as nama, sum(total) as penjualan')
-        ->from('penjualan a')
-        ->join('users b','a.created_by = b.id')
-        ->where('month(a.created_on)', $m)
-        ->where('year(a.created_on)', $y)
-        ->group_by('a.created_by')
-        ->order_by('sum(total)','desc')
-        ->limit(5
-        )->get()->result();
-        return $data;
-    }
-
-    public function get_dashboard($m, $y, $cabang, $own = false)
+    public function get_dashboard($m, $y, $tipe=false)
     {
         $result = array();
-        
-        
-        $result['item_terjual'] = $this->get_item_terjual($m, $y, $cabang, $own);;
-        $result['penjualan_cabang'] = $this->get_penjualan_cabang($m, $y, $cabang);
-        $result['top_konsumen'] = $this->get_top_konsumen($m, $y, $cabang);
-        $result['top'] = $this->get_top($m, $y, $cabang);
-        $result['jumlah'] = $this->count($cabang);
-        $result['jumlah_konsumen'] = $this->count_konsumen();
-        $result['penjualan'] =  $this->get_penjualan($m, $y, $cabang, $own);
+        $result['realisasi_tipe_perusahaan'] = $this->get_realisasi_tipe_perusahaan($m, $y, $tipe);
+        $result['jumlah_permohonan_tjsl'] = $this->count_permohonan_tjsl();
+        $result['jumlah_permohonan_tjsl_acc'] = $this->count_permohonan_tjsl_acc();
+        $result['jumlah_permohonan_tjsl_realisasi'] = $this->count_permohonan_tjsl_realisasi();
+        $result['total_realisasi'] = $this->total_realisasi();
+        $result['realisasi'] =  $this->get_realisasi($m, $y, $tipe);
 
 
         return $result;

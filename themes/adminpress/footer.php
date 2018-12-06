@@ -47,6 +47,44 @@
     <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+<!-- untuk ajax page load -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+                           
+        // var hash = window.location.hash.substr(1);
+        // var href = $('#nav li a').each(function(){
+        //     var href = $(this).attr('href');
+        //     if(hash==href){
+        //         var toLoad = hash+' #content';
+        //         $('#content').load(toLoad)
+        //     }                                           
+        // });
+
+        $('#nav li a').click(function(){    
+            var toLoad = $(this).attr('href')+' #content';
+            alert(toLoad);
+            $('#content').hide('fast',loadContent);
+            $('#load').remove();
+            $('#wrapper').append('<span id="load">LOADING...</span>');
+            $('#load').fadeIn('normal');
+            // window.location.hash = $(this).attr('href').substr(40,$(this).attr('href').length-5);
+            window.location.hash = $(this).attr('href');
+            function loadContent() {
+                $('#content').load(toLoad,'',showNewContent())
+            }
+            function showNewContent() {
+                $('#content').show('normal',hideLoader());
+            }
+            function hideLoader() {
+                $('#load').fadeOut('normal');
+            }
+            return false;
+            
+        });
+
+    });
+    </script>
 </body>
 
 </html>
