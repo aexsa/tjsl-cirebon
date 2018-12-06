@@ -1,5 +1,5 @@
  <script type="text/javascript">
-   var url = "<?php echo site_url('skpd/dashboard/') ?>";
+   var url = "<?php echo site_url('office/dashboard/') ?>";
 </script>
  <div class="card-group">
     <div class="card">
@@ -69,7 +69,7 @@
         </div>
     </div>
 </div>
-         <!-- ============================================================== -->
+<!-- ============================================================== -->
 <!-- Start Page Content -->
 <!-- ============================================================== -->
 <div class="row">
@@ -85,16 +85,5 @@
     </div>
     <!-- column -->
 </div>
- <div class="row">
-    
-    
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Daftar Realisasi Jenis Perusahaan </h4>
-                <div id="realisasi_tipe_perusahaan"></div>
-            </div>
-        </div>
-    </div>
-    <!-- column -->
-</div>
+
+               

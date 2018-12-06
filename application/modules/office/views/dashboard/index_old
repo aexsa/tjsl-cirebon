@@ -1,0 +1,315 @@
+<script type="text/javascript">
+   var url = "<?php echo site_url('skpd/dashboard/') ?>";
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form id="form_filter" >
+                    <div class="row">
+                        <div class="col-md-4">
+                           <div class="form-group">
+                                <select class="form-control" id="bulan" name="bulan">
+                                    <option value="1" <?php echo date('m') == 1 ? 'selected' : '' ?>>Januari</option>
+                                    <option value="2" <?php echo date('m') == 2 ? 'selected' : '' ?>>Februari</option>
+                                    <option value="3" <?php echo date('m') == 3 ? 'selected' : '' ?>>Meret</option>
+                                    <option value="4" <?php echo date('m') == 4 ? 'selected' : '' ?>>April</option>
+                                    <option value="5" <?php echo date('m') == 5 ? 'selected' : '' ?>>Mei</option>
+                                    <option value="6" <?php echo date('m') == 6 ? 'selected' : '' ?>>Juni</option>
+                                    <option value="7" <?php echo date('m') == 7 ? 'selected' : '' ?>>Juli</option>
+                                    <option value="8" <?php echo date('m') == 8 ? 'selected' : '' ?>>Agustus</option>
+                                    <option value="9" <?php echo date('m') == 9 ? 'selected' : '' ?>>September</option>
+                                    <option value="10" <?php echo date('m') == 10 ? 'selected' : '' ?>>Oktober</option>
+                                    <option value="11" <?php echo date('m') == 11 ? 'selected' : '' ?>>November</option>
+                                    <option value="12" <?php echo date('m') == 12 ? 'selected' : '' ?>>Desember</option>
+                                </select>
+                            </div> 
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <select class="form-control" id="tahun" name="tahun">
+                                    <option value="2018" <?php echo date('Y') == 2018 ? 'selected' : '' ?>>2018</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select class="form-control" id="cabang" name="cabang">
+                                    <option value="all">NASIONAL</option>
+                                    <?php foreach ($list_cabang as $key => $value): ?>
+                                        <option value="<?php echo $key ?>" <?php echo $cabang_id == $key ? 'selected' : '' ?>><?php echo $value ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>  
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <button class="btn btn-success btn-block">Tampilkan</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    
+                </form>  
+
+            </div>
+        </div>
+        <div id="loading" style="width: 100%; text-align: center">
+            <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-12"><h2>DASHBOARD : <span id="nama_cabang"></span> </h2></div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+
+        <!-- START WIDGET SLIDER -->
+        <div class="widget widget-info widget-carousel">
+            <br>
+                                      
+                                    
+        </div>         
+        <!-- END WIDGET SLIDER -->
+        
+    </div>
+    <div class="col-md-3">
+
+        <!-- START WIDGET MESSAGES -->
+        <div class="widget widget-default widget-item-icon" onclick="location.href='pages-messages.html';">
+            <div class="widget-item-left">
+                <span class="fa fa-user"></span>
+            </div>                             
+            <div class="widget-data">
+                <div class="widget-int num-count" ><span id="jumlah">0</span></div>
+                <div class="widget-title">Canvaser</div>
+                <!-- <div class="widget-subtitle">In your mailbox</div> -->
+            </div>      
+            <div class="widget-controls">                                
+                <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
+            </div>
+        </div>                            
+        <!-- END WIDGET MESSAGES -->
+        
+    </div>
+    <div class="col-md-3">
+
+        <!-- START WIDGET REGISTRED -->
+        <div class="widget widget-default widget-item-icon" onclick="location.href='<?php echo site_url('pos/konsumen') ?>';">
+            <div class="widget-item-left">
+                <span class="fa fa-user"></span>
+            </div>
+            <div class="widget-data">
+                <div class="widget-int num-count" id="jumlah_konsumen">0</div>
+                <div class="widget-title">Konsumen/RO</div>
+                <!-- <div class="widget-subtitle">On your website</div> -->
+            </div>
+            <div class="widget-controls">                                
+                <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
+            </div>                            
+        </div>                            
+        <!-- END WIDGET REGISTRED -->
+        
+    </div>
+    <div class="col-md-3">
+
+        <!-- START WIDGET CLOCK -->
+        <div class="widget widget-info widget-padding-sm">
+            <div class="widget-big-int plugin-clock">00:00</div>                            
+            <div class="widget-subtitle plugin-date">Loading...</div>
+            <div class="widget-controls">                                
+                <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="left" title="Remove Widget"><span class="fa fa-times"></span></a>
+            </div>                            
+            <div class="widget-buttons widget-c3">
+                <div class="col">
+                    <a href="#"><span class="fa fa-clock-o"></span></a>
+                </div>
+                <div class="col">
+                    <a href="#"><span class="fa fa-bell"></span></a>
+                </div>
+                <div class="col">
+                    <a href="#"><span class="fa fa-calendar"></span></a>
+                </div>
+            </div>                            
+        </div>                        
+        <!-- END WIDGET CLOCK -->
+        
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <!-- START VISITORS BLOCK -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title-box">
+                    <h3>Penjualan</h3>
+                </div>
+                <ul class="panel-controls" style="margin-top: 2px;">
+                    <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
+                    <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
+                            <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
+                        </ul>                                        
+                    </li>                                        
+                </ul>
+            </div>
+            <div class="panel-body padding-0">
+                <div class="chart-holder" id="penjualan" style="height: 250px;"></div>
+            </div>
+        </div>
+        <!-- END VISITORS BLOCK -->
+        
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <!-- START VISITORS BLOCK -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title-box">
+                    <h3>Penjualan Per Cabang</h3>
+                </div>
+                <ul class="panel-controls" style="margin-top: 2px;">
+                    <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
+                    <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
+                            <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
+                        </ul>                                        
+                    </li>                                        
+                </ul>
+            </div>
+            <div class="panel-body padding-0">
+                <div class="chart-holder" id="penjualan_cabang" style="height: 250px;"></div>
+            </div>
+        </div>
+        <!-- END VISITORS BLOCK -->
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+
+        <!-- START VISITORS BLOCK -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title-box">
+                    <h3>Produk Terjual</h3>
+                </div>
+                <ul class="panel-controls" style="margin-top: 2px;">
+                    <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
+                    <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
+                            <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
+                        </ul>                                        
+                    </li>                                        
+                </ul>
+            </div>
+            <div class="panel-body padding-0">
+                <div class="chart-holder" id="item_terjual" style="height: 200px;"></div>
+            </div>
+        </div>
+        <!-- END VISITORS BLOCK -->
+        
+    </div>
+    <div class="col-md-4">
+     <!-- START PROJECTS BLOCK -->
+     <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title-box">
+                <h3>TOP 5 Sales</h3>
+            </div>                                    
+            <ul class="panel-controls" style="margin-top: 2px;">
+                <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
+                <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
+                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
+                    </ul>                                        
+                </li>                                        
+            </ul>
+        </div>
+        <div class="panel-body panel-body-table">
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th width="50%">Nama</th>
+                            <th width="20%">Kota</th>
+                            <th width="30%">Penjualan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="top">
+                    
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- END PROJECTS BLOCK -->
+</div>
+<div class="col-md-4">
+   <!-- START PROJECTS BLOCK -->
+   <div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-title-box">
+            <h3>TOP 5 Konnsumen</h3>
+        </div>                                    
+        <ul class="panel-controls" style="margin-top: 2px;">
+            <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
+            <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
+                <ul class="dropdown-menu">
+                    <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
+                    <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
+                </ul>                                        
+            </li>                                        
+        </ul>
+    </div>
+    <div class="panel-body panel-body-table">
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th width="50%">Nama</th>
+                        <th width="20%">Kota</th>
+                        <th width="30%">Pembelian</th>
+                    </tr>
+                </thead>
+                <tbody id="top_konsumen">
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<!-- END PROJECTS BLOCK -->
+</div>
+</div>
